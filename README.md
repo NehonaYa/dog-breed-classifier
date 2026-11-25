@@ -7,7 +7,9 @@
 Жоба GeeksforGeeks мақаласына негізделген: [Multiclass image classification using Transfer learning](https://www.geeksforgeeks.org/deep-learning/multiclass-image-classification-using-transfer-learning/).
 Біз оның нәтижесін қайталап, деректер сапасын тексердік, бірнеше модельді салыстырдық және нәтижені сайтқа айналдырдық.
 
-![Сайттың басты беті: сурет және модельдің болжамы](docs/screenshots/site_home.png)
+![Сайттың басты беті](docs/screenshots/site_home.png)
+
+![Демо: жүктелген сурет және модельдің болжамы](docs/screenshots/site_demo.png)
 
 ## Қысқаша нәтиже
 
@@ -217,10 +219,13 @@ macro F1 92,2%, weighted F1 92,5%, log loss 0,249, ECE 0,012 (жақсы кал�
 ## 13. Қолданба: сайт және API
 
 Сайт **FastAPI + Jinja2 + HTML/CSS/JS** арқылы жасалған (қазақ тілінде). Сервер іске қосылғанда модельді бір рет жүктейді.
+Анимациялар: **GSAP** (ScrollTrigger: элементтердің біртіндеп пайда болуы, сандарды санау, нәтиже индикаторы) және
+**Vanta.js** (three.js негізіндегі «нейрондық желі» фоны). Кітапханалар `web/static/vendor/` ішінде жергілікті сақталған, сондықтан сайт интернетсіз де жұмыс істейді.
+`prefers-reduced-motion` баптауы ескеріледі, ал әлсіз компьютерде (FPS < 20) фон анимациясы өздігінен өшеді.
 
 | Бет | Мазмұны |
 |---|---|
-| `/` Басты бет | суретті жүктеу (батырма, сүйреп әкелу, Ctrl+V), test жиынынан кездейсоқ мысал, top-5 тұқым, ескертулер |
+| `/` Басты бет | мысал суреттер галереясы (бір басумен тексеру), суретті жүктеу (батырма, сүйреп әкелу, Ctrl+V), test жиынынан кездейсоқ мысал, сенімділік индикаторы мен top-5 тұқым, ескертулер |
 | `/models` Модельдер | салыстыру кестесі, графиктер, қателерді талдау |
 | `/data` Деректер | деректер жиыны, тазалау нәтижесі, EDA графиктері |
 | `/about` Жоба туралы | мақсат, әдістеме, шектеулер, дереккөздер |
@@ -317,7 +322,7 @@ dog-breed-classifier/
 ├── reports/metrics/         comparison.csv, final_model.json, per_class.csv, confused_pairs.csv, summary.json
 ├── scripts/                 00–06: деректерден бастап бағалауға дейінгі қадамдар
 ├── src/                     config, деректер, модельдер (backbones, heads), метрикалар, EDA, болжау (inference)
-├── web/                     main.py (FastAPI), templates/ (беттер), static/ (CSS, JS)
+├── web/                     main.py (FastAPI), templates/ (беттер), static/ (CSS, JS, vendor/: GSAP, three.js, Vanta; examples/: мысал суреттер)
 ├── requirements.txt
 └── run_all.ps1              бүкіл pipeline
 ```

@@ -40,6 +40,7 @@ async def lifespan(_app: FastAPI):
     state["comparison"] = read_json(METRICS_DIR / "comparison.json", [])
     state["quality"] = read_json(DATA_QUALITY_JSON, {})
     state["eda"] = read_json(METRICS_DIR / "eda_stats.json", {})
+    state["examples"] = read_json(WEB_DIR / "static" / "examples" / "examples.json", [])  # галереядағы мысалдар
     try:  # "кездейсоқ мысал" батырмасы үшін test суреттері (деректер жүктелген болса)
         df = load_splits()
         test = df[df["split"] == "test"].reset_index(drop=True)
@@ -55,12 +56,12 @@ app.mount("/static", StaticFiles(directory=WEB_DIR / "static"), name="static")
 app.mount("/figures", StaticFiles(directory=FIG_DIR, check_dir=False), name="figures")
 templates = Jinja2Templates(directory=WEB_DIR / "templates")
 templates.env.filters["pct"] = lambda v, d=1: "—" if v is None else f"{float(v) * 100:.{d}f}%"
-templates.env.globals["asset_v"] = "1.2"  # CSS/JS өзгерсе, нөмірді арттырыңыз (браузер кэшін жаңарту)
+templates.env.globals["asset_v"] = "2.1"  # CSS/JS өзгерсе, нөмірді арттырыңыз (браузер кэшін жаңарту)
 templates.env.filters["num"] =lambda v: "—" if v is None else f"{int(v):,}".replace(",", " ")
 
 
 def page(request: Request, name: str, active: str):
-    ctx = {k: state.get(k) for k in ("final", "summary", "comparison", "quality", "eda")}
+    ctx = {k: state.get(k) for k in ("final", "summary", "comparison", "quality", "eda", "examples")}
     ctx.update(active=active, has_test_images=state.get("test_df") is not None)
     return templates.TemplateResponse(request, name, ctx)
 

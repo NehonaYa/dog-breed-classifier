@@ -1,0 +1,146 @@
+[
+  {
+    "file": "golden_retriever.jpg",
+    "breed": "Golden retriever",
+    "top3": [
+      {
+        "breed": "Golden retriever",
+        "prob": 0.9922
+      },
+      {
+        "breed": "Irish setter",
+        "prob": 0.0011
+      },
+      {
+        "breed": "Kuvasz",
+        "prob": 0.0011
+      }
+    ]
+  },
+  {
+    "file": "siberian_husky.jpg",
+    "breed": "Siberian husky",
+    "top3": [
+      {
+        "breed": "Siberian husky",
+        "prob": 0.9706
+      },
+      {
+        "breed": "Malamute",
+        "prob": 0.0169
+      },
+      {
+        "breed": "Eskimo dog",
+        "prob": 0.0032
+      }
+    ]
+  },
+  {
+    "file": "pug.jpg",
+    "breed": "Pug",
+    "top3": [
+      {
+        "breed": "Pug",
+        "prob": 0.999
+      },
+      {
+        "breed": "Norwegian elkhound",
+        "prob": 0.0001
+      },
+      {
+        "breed": "Bull mastiff",
+        "prob": 0.0001
+      }
+    ]
+  },
+  {
+    "file": "german_shepherd.jpg",
+    "breed": "German shepherd",
+    "top3": [
+      {
+        "breed": "German shepherd",
+        "prob": 0.9962
+      },
+      {
+        "breed": "Pembroke",
+        "prob": 0.0005
+      },
+      {
+        "breed": "Airedale",
+        "prob": 0.0004
+      }
+    ]
+  },
+  {
+    "file": "samoyed.jpg",
+    "breed": "Samoyed",
+    "top3": [
+      {
+        "breed": "Samoyed",
+        "prob": 0.9955
+      },
+      {
+        "breed": "Keeshond",
+        "prob": 0.0015
+      },
+      {
+        "breed": "Chow",
+        "prob": 0.0004
+      }
+    ]
+  },
+  {
+    "file": "beagle.jpg",
+    "breed": "Beagle",
+    "top3": [
+      {
+        "breed": "Beagle",
+        "prob": 0.9785
+      },
+      {
+        "breed": "English foxhound",
+        "prob": 0.0108
+      },
+      {
+        "breed": "Walker hound",
+        "prob": 0.003
+      }
+    ]
+  },
+  {
+    "file": "pembroke.jpg",
+    "breed": "Pembroke",
+    "top3": [
+      {
+        "breed": "Pembroke",
+        "prob": 0.9026
+      },
+      {
+        "breed": "Golden retriever",
+        "prob": 0.0691
+      },
+      {
+        "breed": "Cardigan",
+        "prob": 0.0081
+      }
+    ]
+  },
+  {
+    "file": "bernese_mountain_dog.jpg",
+    "breed": "Bernese mountain dog",
+    "top3": [
+      {
+        "breed": "Bernese mountain dog",
+        "prob": 0.966
+      },
+      {
+        "breed": "Greater Swiss Mountain dog",
+        "prob": 0.0132
+      },
+      {
+        "breed": "Appenzeller",
+        "prob": 0.0127
+      }
+    ]
+  }
+]

@@ -27,7 +27,7 @@
         <li><strong>Бөлініс:</strong> ресми train/test бөлінісі сақталды. Ресми train-нен әр тұқымға 15 сурет валидацияға бөлінді.</li>
       </ul>
     </div>
-    <div class="table-wrap">
+    <div data-reveal class="table-wrap">
       <table>
         <thead><tr><th>Бөлік</th><th class="num">Сурет</th><th>Мақсаты</th></tr></thead>
         <tbody>
@@ -43,7 +43,7 @@
 
 <section class="container section">
   <h2>Деректерді тазалау: не таптық?</h2>
-  <div class="stat-list">
+  <div data-reveal class="stat-list">
     <div class="kpi"><dt>Бұзылған файл</dt><dd>{{ q.corrupt_files if q.corrupt_files is not none else '—' }}</dd></div>
     <div class="kpi"><dt>Түзетілген файл (PNG → JPEG)</dt><dd>{{ q.fixed_images if q.fixed_images is not none else '—' }}</dd></div>
     <div class="kpi"><dt>Жуық көшірме жұптары</dt><dd>{{ q.near_duplicate_pairs if q.near_duplicate_pairs is not none else '—' }}</dd></div>
@@ -61,24 +61,24 @@
         қалдырылды. Сондықтан test-тегі қателердің бір бөлігін модель түбегейлі болдыра алмайды.</li>
     </ul>
   </div>
-  <figure class="fig card" style="margin-top:12px"><img src="/figures/eda_duplicates.png" alt="Екі түрлі тұқыммен белгіленген бірдей суреттердің мысалдары" loading="lazy">
+  <figure data-reveal class="fig card" style="margin-top:12px"><img src="/figures/eda_duplicates.png" alt="Екі түрлі тұқыммен белгіленген бірдей суреттердің мысалдары" loading="lazy">
     <figcaption>Бірдей суреттер, бірақ белгілері әртүрлі: деректер жиынындағы белгі қателерінің мысалдары.</figcaption></figure>
 </section>
 
 <section class="container section">
   <h2>Барлау талдауы (EDA)</h2>
-  <figure class="fig card"><img src="/figures/eda_samples.png" alt="Әртүрлі тұқымдардың сурет мысалдары" loading="lazy">
+  <figure data-reveal class="fig card"><img src="/figures/eda_samples.png" alt="Әртүрлі тұқымдардың сурет мысалдары" loading="lazy">
     <figcaption>Деректерден мысалдар: фон, жарық, ракурс және иттің кадрдағы өлшемі әртүрлі.</figcaption></figure>
   <div class="grid-2" style="margin-top:20px">
-    <figure class="fig card"><img src="/figures/eda_class_distribution.png" alt="Әр тұқымдағы сурет саны" loading="lazy">
+    <figure data-reveal class="fig card"><img src="/figures/eda_class_distribution.png" alt="Әр тұқымдағы сурет саны" loading="lazy">
       <figcaption>Әр тұқымдағы сурет саны: train теңестірілген (әр тұқымда шамамен 85 сурет), ал test теңестірілмеген.</figcaption></figure>
-    <figure class="fig card"><img src="/figures/eda_image_sizes.png" alt="Сурет өлшемдерінің таралуы" loading="lazy">
+    <figure data-reveal class="fig card"><img src="/figures/eda_image_sizes.png" alt="Сурет өлшемдерінің таралуы" loading="lazy">
       <figcaption>Суреттердің ені мен биіктігі және пропорциясы. Модельге берер алдында барлығы бір өлшемге келтіріледі.</figcaption></figure>
   </div>
   <div class="grid-2" style="margin-top:20px">
-    <figure class="fig card"><img src="/figures/eda_bbox.png" alt="Иттің кадрдағы ауданы және ит санының таралуы" loading="lazy">
+    <figure data-reveal class="fig card"><img src="/figures/eda_bbox.png" alt="Иттің кадрдағы ауданы және ит санының таралуы" loading="lazy">
       <figcaption>Иттің кадрдағы ауданының үлесі және бір суреттегі ит саны (аннотация бойынша).</figcaption></figure>
-    <figure class="fig card"><img src="/figures/eda_brightness.png" alt="Суреттердің жарықтығы мен түс арналарының таралуы" loading="lazy">
+    <figure data-reveal class="fig card"><img src="/figures/eda_brightness.png" alt="Суреттердің жарықтығы мен түс арналарының таралуы" loading="lazy">
       <figcaption>Суреттердің орташа жарықтығы мен түс арналары: деректер жарық пен түс жағынан әртүрлі.</figcaption></figure>
   </div>
 </section>

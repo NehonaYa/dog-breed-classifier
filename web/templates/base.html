@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}?v={{ asset_v }}">
   <link rel="icon" href="{{ url_for('static', path='img/paw.svg') }}" type="image/svg+xml">
 </head>
-<body>
+<body class="page-{{ active }}">
   <a class="skip-link" href="#main">Негізгі мазмұнға өту</a>
   <header class="site-header">
     <div class="container header-inner">
@@ -34,11 +34,32 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>Машиналық оқыту пәні бойынша оқу жобасы · Transfer learning арқылы көпкласты кескін жіктеу</p>
-      <p class="muted">Деректер: Stanford Dogs Dataset (Khosla et al., 2011) · Модель: TensorFlow / Keras · Сайт: FastAPI</p>
+    <div class="container footer-grid">
+      <div>
+        <a class="brand brand-light" href="/">
+          <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-paw"/></svg>
+          <span>Ит тұқымын тану</span>
+        </a>
+        <p class="footer-text">Машиналық оқыту пәні бойынша қорытынды жоба: transfer learning арқылы иттің 120 тұқымын суреттен анықтау.</p>
+      </div>
+      <nav class="footer-links" aria-label="Төменгі мәзір">
+        <h4>Беттер</h4>
+        <a href="/">Басты бет</a><a href="/models">Модельдер</a><a href="/data">Деректер</a><a href="/about">Жоба туралы</a><a href="/docs">API құжаттамасы</a>
+      </nav>
+      <div class="footer-links">
+        <h4>Технологиялар</h4>
+        <span>TensorFlow / Keras · scikit-learn</span><span>FastAPI · Jinja2</span><span>GSAP · Vanta.js · three.js</span>
+        <span>Деректер: Stanford Dogs (Khosla et al., 2011)</span>
+      </div>
     </div>
   </footer>
+
+  <dialog id="lightbox" class="lightbox" aria-label="Графикті үлкейтіп көру">
+    <button class="lightbox-close" type="button" aria-label="Жабу">
+      <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
+    </button>
+    <img alt="">
+  </dialog>
 
   <!-- SVG иконкалар (Lucide стилінде) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -67,7 +88,36 @@
     <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
     </symbol>
+    <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+    </symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>
+    </symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>
+    </symbol>
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+    </symbol>
+    <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/>
+    </symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+    </symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.13-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.13a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.13 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/>
+    </symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>
+    </symbol>
   </svg>
+  <!-- Анимациялар: GSAP (жергілікті көшірме, интернетсіз де жұмыс істейді) -->
+  <script src="{{ url_for('static', path='vendor/gsap.min.js') }}" defer></script>
+  <script src="{{ url_for('static', path='vendor/ScrollTrigger.min.js') }}" defer></script>
+  {% block vendor %}{% endblock %}
+  <script src="{{ url_for('static', path='js/effects.js') }}?v={{ asset_v }}" defer></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

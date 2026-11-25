@@ -20,13 +20,13 @@
   <h2>Таңдалған модель</h2>
   <p class="prose"><strong>{{ final.title }}</strong></p>
   <dl class="kpis">
-    <div class="kpi"><dt>Accuracy (test)</dt><dd>{{ m.accuracy | pct }}</dd></div>
-    <div class="kpi"><dt>Top-5 accuracy</dt><dd>{{ m.top5_accuracy | pct }}</dd></div>
-    <div class="kpi"><dt>Macro F1</dt><dd>{{ m.macro_f1 | pct }}</dd></div>
+    <div class="kpi" data-reveal><dt>Accuracy (test)</dt><dd data-count="{{ "%.1f" % (m.accuracy * 100) }}" data-decimals="1" data-suffix="%">{{ m.accuracy | pct }}</dd></div>
+    <div class="kpi" data-reveal><dt>Top-5 accuracy</dt><dd data-count="{{ "%.1f" % (m.top5_accuracy * 100) }}" data-decimals="1" data-suffix="%">{{ m.top5_accuracy | pct }}</dd></div>
+    <div class="kpi" data-reveal><dt>Macro F1</dt><dd data-count="{{ "%.1f" % (m.macro_f1 * 100) }}" data-decimals="1" data-suffix="%">{{ m.macro_f1 | pct }}</dd></div>
     <div class="kpi"><dt>Log loss</dt><dd>{{ '%.3f' % m.log_loss if m.log_loss is not none else '—' }}</dd></div>
   </dl>
   {% if summary and summary.article_replica %}
-  <div class="callout" style="margin-top:20px">
+  <div data-reveal class="callout" style="margin-top:20px">
     <h3>Мақаламен салыстыру</h3>
     <p class="prose" style="margin:0">
       GeeksforGeeks мақаласында InceptionResNetV2 моделінің валидациядағы дәлдігі
@@ -45,7 +45,7 @@
 
 <section class="container section">
   <h2>Барлық модельдің нәтижелері</h2>
-  <div class="table-wrap">
+  <div data-reveal class="table-wrap">
     <table>
       <thead>
         <tr>
@@ -91,12 +91,12 @@
 <section class="container section">
   <h2>Графиктер</h2>
   <div class="grid-2">
-    <figure class="fig card"><img src="/figures/model_comparison.png" alt="Модельдердің test дәлдігі: бағаналы диаграмма" loading="lazy">
+    <figure data-reveal class="fig card"><img src="/figures/model_comparison.png" alt="Модельдердің test дәлдігі: бағаналы диаграмма" loading="lazy">
       <figcaption>1-сурет. Барлық модельдің test жиынындағы дәлдігі. Нөлден оқытылған CNN мен transfer learning арасындағы айырма өте үлкен.</figcaption></figure>
-    <figure class="fig card"><img src="/figures/accuracy_vs_latency.png" alt="Дәлдік пен жылдамдық арасындағы байланыс" loading="lazy">
+    <figure data-reveal class="fig card"><img src="/figures/accuracy_vs_latency.png" alt="Дәлдік пен жылдамдық арасындағы байланыс" loading="lazy">
       <figcaption>2-сурет. Дәлдік пен жылдамдық: үлкен модель дәлірек, бірақ баяу. Мобильді құрылғыға MobileNetV2 ыңғайлы.</figcaption></figure>
   </div>
-  <figure class="fig card" style="margin-top:20px"><img src="/figures/training_curves.png" alt="Оқу қисықтары: дәлдік және қате эпохалар бойынша" loading="lazy">
+  <figure data-reveal class="fig card" style="margin-top:20px"><img src="/figures/training_curves.png" alt="Оқу қисықтары: дәлдік және қате эпохалар бойынша" loading="lazy">
     <figcaption>3-сурет. Оқу қисықтары. EarlyStopping валидациядағы қате (val loss) ең төмен болған эпохадағы салмақтарды қалпына келтіреді.</figcaption></figure>
 </section>
 
@@ -106,7 +106,7 @@
   <p class="prose">Модель жиі шатастыратын тұқымдар — сырт келбеті өте ұқсас тұқымдар (мысалы, бір тұқымның түрлі
     өлшемдері немесе туыстас тұқымдар). Бұл қатенің бір бөлігі деректердің өзінен: деректерді тексергенде бір суреттің
     екі түрлі тұқыммен белгіленген жағдайларын таптық.</p>
-  <div class="table-wrap" style="max-width:780px">
+  <div data-reveal class="table-wrap" style="max-width:780px">
     <table>
       <thead><tr><th>Шын тұқым</th><th>Модельдің болжамы</th><th class="num">Саны</th><th class="num">Шын класс ішіндегі үлесі</th></tr></thead>
       <tbody>
@@ -118,17 +118,17 @@
   </div>
   {% endif %}
   <div class="grid-2" style="margin-top:20px">
-    <figure class="fig card"><img src="/figures/confusion_top.png" alt="Ең жиі шатастырылатын тұқымдардың қателер матрицасы" loading="lazy">
+    <figure data-reveal class="fig card"><img src="/figures/confusion_top.png" alt="Ең жиі шатастырылатын тұқымдардың қателер матрицасы" loading="lazy">
       <figcaption>4-сурет. Қателер матрицасының бір бөлігі: ең жиі шатастырылатын тұқымдар.</figcaption></figure>
-    <figure class="fig card"><img src="/figures/per_class_worst.png" alt="Ең нашар танылатын 15 тұқымның F1 мәні" loading="lazy">
+    <figure data-reveal class="fig card"><img src="/figures/per_class_worst.png" alt="Ең нашар танылатын 15 тұқымның F1 мәні" loading="lazy">
       <figcaption>5-сурет. Ең нашар танылатын 15 тұқым (F1).</figcaption></figure>
   </div>
-  <figure class="fig card" style="margin-top:20px"><img src="/figures/misclassified_examples.png" alt="Модель қателескен test суреттерінің мысалдары" loading="lazy">
+  <figure data-reveal class="fig card" style="margin-top:20px"><img src="/figures/misclassified_examples.png" alt="Модель қателескен test суреттерінің мысалдары" loading="lazy">
     <figcaption>6-сурет. Модель ең сенімді түрде қателескен суреттер. Кейбірінде суретте бірнеше ит бар немесе белгі (label) күмәнді.</figcaption></figure>
   <div class="grid-2" style="margin-top:20px">
-    <figure class="fig card"><img src="/figures/confidence_calibration.png" alt="Сенімділік гистограммасы және калибрлеу графигі" loading="lazy">
+    <figure data-reveal class="fig card"><img src="/figures/confidence_calibration.png" alt="Сенімділік гистограммасы және калибрлеу графигі" loading="lazy">
       <figcaption>7-сурет. Қате жауаптарда модельдің сенімділігі әдетте төмен. Сайттағы «сенімсіз» ескертуі осыған негізделген.</figcaption></figure>
-    <figure class="fig card"><img src="/figures/error_vs_bbox.png" alt="Иттің кадрдағы өлшемі мен ит саны бойынша дәлдік" loading="lazy">
+    <figure data-reveal class="fig card"><img src="/figures/error_vs_bbox.png" alt="Иттің кадрдағы өлшемі мен ит саны бойынша дәлдік" loading="lazy">
       <figcaption>8-сурет. Ит кадрда кішкентай болса (ауданы 25%-дан аз), дәлдік айтарлықтай төмендейді. Ит санының әсері әлсіз.</figcaption></figure>
   </div>
 </section>
