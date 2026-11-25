@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block content %}
+{% set m = final.test_metrics if final else {} %}
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="eyebrow">Transfer learning · 120 тұқым · Stanford Dogs</p>
+    <h1>Иттің тұқымын суреттен анықтау</h1>
+    <p class="lead">
+      Ит суретін жүктеңіз: модель оның 120 тұқымның қайсысына жататынын анықтап, ең ықтимал
+      бес нұсқаны пайызымен көрсетеді. Негізі — ImageNet-те алдын ала үйретілген
+      <strong>{{ final.title.split(' + ')[0] if final else 'нейрондық желі' }}</strong>, ал жоғарғы
+      классификаторын біз Stanford Dogs деректерінде оқыттық.
+    </p>
+    <dl class="kpis" aria-label="Модельдің негізгі көрсеткіштері">
+      <div class="kpi"><dt>Test дәлдігі</dt><dd>{{ m.accuracy | pct }}</dd></div>
+      <div class="kpi"><dt>Top-5 дәлдігі</dt><dd>{{ m.top5_accuracy | pct }}</dd></div>
+      <div class="kpi"><dt>Macro F1</dt><dd>{{ m.macro_f1 | pct }}</dd></div>
+      <div class="kpi"><dt>Тұқым саны</dt><dd>120</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="container demo" aria-labelledby="demo-title">
+  <h2 id="demo-title" class="visually-hidden">Тұқымды анықтау</h2>
+  <div class="demo-grid">
+    <div class="card upload-card">
+      <div class="card-head">
+        <h3>1. Суретті жүктеу</h3>
+      </div>
+      <div id="dropzone" class="dropzone" tabindex="0" role="button"
+           aria-label="Сурет таңдау: басыңыз немесе файлды осында сүйреп әкеліңіз">
+        <img id="preview" class="preview" alt="" hidden>
+        <div id="drop-empty" class="drop-empty">
+          <svg class="icon-lg" aria-hidden="true"><use href="#i-upload"/></svg>
+          <p class="drop-title">Суретті осында сүйреп әкеліңіз</p>
+          <p class="muted">немесе</p>
+          <span class="btn btn-primary">Файл таңдау</span>
+          <p class="hint">JPG, PNG, WEBP · 10 МБ-қа дейін · Ctrl+V арқылы қоюға болады</p>
+        </div>
+      </div>
+      <input id="file-input" type="file" accept="image/*" hidden>
+      <div class="upload-actions">
+        <button id="pick-btn" class="btn btn-secondary" type="button">
+          <svg class="icon" aria-hidden="true"><use href="#i-upload"/></svg> Басқа сурет
+        </button>
+        {% if has_test_images %}
+        <button id="random-btn" class="btn btn-secondary" type="button">
+          <svg class="icon" aria-hidden="true"><use href="#i-shuffle"/></svg> Test жиынынан кездейсоқ мысал
+        </button>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card result-card">
+      <div class="card-head"><h3>2. Нәтиже</h3></div>
+      <div id="result" aria-live="polite">
+        <div id="result-empty" class="result-empty">
+          <svg class="icon-lg" aria-hidden="true"><use href="#i-paw"/></svg>
+          <p>Сурет жүктелгеннен кейін нәтиже осында шығады.</p>
+        </div>
+        <div id="result-loading" class="result-loading" hidden>
+          <span class="spinner" aria-hidden="true"></span>
+          <p>Модель суретті талдап жатыр…</p>
+        </div>
+        <div id="result-error" class="alert alert-critical" role="alert" hidden></div>
+        <div id="result-body" hidden>
+          <p class="result-label">Ең ықтимал тұқым</p>
+          <p id="top1-name" class="top1-name"></p>
+          <div class="confidence">
+            <div class="bar-track" aria-hidden="true"><div id="top1-bar" class="bar-fill"></div></div>
+            <span id="top1-prob" class="confidence-value"></span>
+          </div>
+          <div id="truth" class="truth" hidden></div>
+          <div id="warn-dog" class="alert alert-warning" hidden>
+            <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+            <span id="warn-dog-text"></span>
+          </div>
+          <div id="warn-conf" class="alert alert-warning" hidden>
+            <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+            <span id="warn-conf-text"></span>
+          </div>
+          <h4 class="top5-title">Ең ықтимал 5 тұқым</h4>
+          <ol id="top5" class="top5"></ol>
+          <p id="meta" class="meta"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container how" aria-labelledby="how-title">
+  <h2 id="how-title">Қалай жұмыс істейді?</h2>
+  <ol class="steps">
+    <li class="step">
+      <span class="step-num">1</span>
+      <h3>Сурет</h3>
+      <p>Суретті {{ final.input_size or 299 }}×{{ final.input_size or 299 }} өлшемге келтіріп, пиксельдерді
+         модель күткен ауқымға түрлендіреміз.</p>
+    </li>
+    <li class="step">
+      <span class="step-num">2</span>
+      <h3>Алдын ала үйретілген желі</h3>
+      <p>ImageNet-тегі 1,2 млн суретте үйретілген желі. Салмақтары өзгермейді (мұздатылған):
+         ол суретті белгілер векторына айналдырады.</p>
+    </li>
+    <li class="step">
+      <span class="step-num">3</span>
+      <h3>Біздің классификатор</h3>
+      <p>Белгілер векторының үстінде 120 тұқымды ажырататын қабатты Stanford Dogs деректерінде оқыттық.</p>
+    </li>
+    <li class="step">
+      <span class="step-num">4</span>
+      <h3>Нәтиже</h3>
+      <p>120 тұқымның ықтималдығы. Ең үлкен бесеуін көрсетеміз, сенімсіз жағдайда ескерту береміз.</p>
+    </li>
+  </ol>
+  <div class="note">
+    <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
+    <p><strong>Шектеулер.</strong> Модель тек осы 120 тұқымды біледі. Аралас тұқымдар, күшіктер, басқа жануарлар
+      немесе сапасы төмен суреттер үшін нәтиже сенімсіз болуы мүмкін. Толығырақ:
+      <a href="/models">Модельдер</a> және <a href="/about">Жоба туралы</a> беттерінде.</p>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>window.APP_CONFIG = {lowConf: {{ final.low_confidence_threshold or 0.4 }}, dogThreshold: {{ final.dogness_threshold or 0.5 }}};</script>
+<script src="{{ url_for('static', path='js/app.js') }}?v={{ asset_v }}" defer></script>
+{% endblock %}

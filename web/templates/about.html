@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Жоба туралы — Ит тұқымын тану{% endblock %}
+{% block content %}
+{% set m = final.test_metrics if final else {} %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Жоба туралы</p>
+    <h1>Transfer learning арқылы көпкласты кескін жіктеу</h1>
+    <p class="lead">Негізгі идея GeeksforGeeks мақаласынан алынды («Multiclass image classification using transfer learning»).
+      Біз оны қайталап, деректер сапасын тексердік, бірнеше модельді салыстырдық және нәтижені сайтқа айналдырдық.</p>
+  </div>
+</section>
+
+<section class="container section prose">
+  <h2>Мәселенің қойылымы</h2>
+  <p>Иттің тұқымын суреттен анықтау — <strong>120 класты «ұсақ түйіршікті» (fine-grained) кескін жіктеу</strong> міндеті:
+    тұқымдар бір-біріне өте ұқсас, ал бір тұқымның ішінде түсі, жасы, позасы мен фоны әртүрлі. Мұндай жүйе ветеринарлық
+    қызметтерге, жоғалған жануарларды іздеу платформаларына, баспана каталогтарына қажет. 120 класты нөлден үйрету үшін өте
+    көп сурет пен қуатты GPU керек. <strong>Transfer learning</strong> бұл мәселені шешеді: ImageNet-те (1,2 млн сурет)
+    үйренген білімді жаңа міндетке көшіреміз.</p>
+
+  <h2>Мақсат және міндеттер</h2>
+  <p><strong>Мақсаты:</strong> ит суретінен оның тұқымын (120 тұқымның бірін) анықтайтын, сапасы бірнеше метрикамен
+    өлшенген және сайт арқылы қолжетімді модель жасау. Жетістік өлшемі: тәуелсіз test жиынында accuracy ≥ 85% және
+    top-5 ≥ 97% (мақаладағы ~90% деңгейімен салыстыру).</p>
+  <ol>
+    <li>Деректерді жүктеу, тексеру және тазалау (бұзылған файлдар, форматтар, көшірмелер, белгі қайшылықтары).</li>
+    <li>Барлау талдауы (EDA): кластардың таралуы, сурет өлшемдері, аннотация бойынша иттің кадрдағы үлесі.</li>
+    <li>Бастапқы модель: нөлден оқытылатын шағын CNN.</li>
+    <li>Transfer learning: 3 алдын ала үйретілген модель (MobileNetV2, EfficientNetB0, InceptionResNetV2) × 3 классификатор, соның ішінде мақаладағы модель мен басты қайталау.</li>
+    <li>Барлық модельді бір test жиынында бірнеше метрикамен салыстыру. Соңғы модельді валидация бойынша таңдау.</li>
+    <li>Қателерді, калибрлеуді және шектеулерді талдау.</li>
+    <li>Модельмен байланысқан сайт және API (FastAPI) жасау.</li>
+  </ol>
+
+  <h2>Әдістеме</h2>
+  <p>Алдын ала үйретілген модельдің (backbone) салмақтары мұздатылады. Ол әр суретті сандық белгілер векторына айналдырады
+    (мысалы, InceptionResNetV2 үшін 1536 сан). Мұздатылған модельдің шығысы өзгермейтіндіктен, белгілерді бір рет
+    есептеп сақтаймыз, ал жоғарғы классификаторды (head) осы векторлардың үстінде оқытамыз. Бұл мақаладағы
+    <code>base_model.trainable = False</code> тәсілімен математикалық тұрғыдан бірдей, бірақ GPU-сыз да тез орындалады.
+    Кеңейту (augmentation) ретінде мақаладағыдай көлденең айналдыру қолданылды.</p>
+
+  <h2>Мақаладан айырмашылығы (жобаның жеке үлесі)</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Аспект</th><th>Мақалада</th><th>Біздің жобада</th></tr></thead>
+      <tbody>
+        <tr><td>Деректер</td><td>Kaggle, 10 222 сурет</td><td>Ресми Stanford Dogs, 20 580 сурет</td></tr>
+        <tr><td>Бағалау</td><td>тек train/val, тек accuracy</td><td>тәуелсіз test; accuracy, top-5, macro F1, log loss, ECE</td></tr>
+        <tr><td>Деректер сапасы</td><td>тексерілмеген</td><td>көшірмелер, leakage, белгі қайшылықтары табылып, тазаланды</td></tr>
+        <tr><td>Модельдер</td><td>бір модель (InceptionResNetV2)</td><td>baseline CNN + 3 backbone × 3 классификатор + оқытусыз ImageNet басы</td></tr>
+        <tr><td>Алдын ала өңдеу</td><td>331×331, пиксель / 255</td><td>модельдің өз өлшемі (299×299) және өз <code>preprocess_input</code> функциясы ([-1, 1] ауқымы)</td></tr>
+        <tr><td>Нәтиже</td><td>Colab ноутбугы</td><td>сайт + REST API, құжатталған GitHub репозиторийі</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:12px"><strong>Сыртқы код пен ресурстар:</strong> Keras Applications (дайын модельдер мен ImageNet салмақтары),
+    мақаладағы классификатор басының архитектурасы. Деректерді тазалау, эксперименттер, бағалау және сайт осы жоба аясында жазылды.</p>
+
+  <h2>Шектеулер</h2>
+  <ul>
+    <li>Модель тек 120 тұқымды біледі. Аралас тұқымдар, басқа жануарлар немесе адам суреті үшін бәрібір бір тұқымды
+      атайды. Сондықтан сайтта «суретте ит бар ма» тексерісі мен «сенімсіз» ескертуі бар.</li>
+    <li><strong>ImageNet-пен қиылысу:</strong> Stanford Dogs суреттері ImageNet-тен алынған, ал алдын ала үйретілген модельдер
+      ImageNet-те оқыған. Сондықтан test нәтижесі нақты өмірдегі жаңа суреттерге қарағанда жоғарырақ болуы мүмкін.
+      Оқытусыз ImageNet басының өзі жоғары дәлдік беретіні мұны растайды.</li>
+    <li>Деректерде белгі қателері бар (бір сурет екі тұқыммен белгіленген): test-тегі кейбір «қателер» модельдің кінәсі емес.</li>
+    <li>Ит кадрда кішкентай болса (кадрдың 25%-ынан аз), дәлдік айтарлықтай төмендейді. Мұндай суреттер деректердің 14,5%-ы.</li>
+    <li>Ең дәл модель (InceptionResNetV2) CPU-да баяу, ал жылдам модель (MobileNetV2) дәлдігі төменірек.</li>
+  </ul>
+
+  <h2>Болашақта дамыту</h2>
+  <ul>
+    <li>GPU-да fine-tuning: backbone-ның жоғарғы блоктарын да оқыту; жаңа архитектуралар (EfficientNetV2, ConvNeXt, ViT).</li>
+    <li>Алдымен итті объект детекторымен (мысалы, YOLO) тауып, қиып алу. Бұл кішкентай иттер мен көп ит бар суреттерде көмектеседі.</li>
+    <li>ImageNet-ке кірмеген тәуелсіз деректерде тексеру (мысалы, Қазақстандағы баспана суреттері).</li>
+    <li>Тұқым атауларын қазақ тіліне аудару, мобильді нұсқа (TensorFlow Lite), ықтималдықтарды калибрлеу (temperature scaling).</li>
+  </ul>
+
+  <h2>Пайдаланылған дереккөздер</h2>
+  <ol>
+    <li>GeeksforGeeks. <a href="https://www.geeksforgeeks.org/deep-learning/multiclass-image-classification-using-transfer-learning/">Multiclass image classification using Transfer learning</a>, 2024.</li>
+    <li>Khosla A., Jayadevaprakash N., Yao B., Fei-Fei L. Novel Dataset for Fine-Grained Image Categorization: Stanford Dogs. CVPR Workshop on FGVC, 2011.</li>
+    <li>Kaggle. <a href="https://www.kaggle.com/c/dog-breed-identification">Dog Breed Identification</a>, 2017.</li>
+    <li>Deng J. et al. ImageNet: A Large-Scale Hierarchical Image Database. CVPR, 2009.</li>
+    <li>Szegedy C. et al. Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning. AAAI, 2017.</li>
+    <li>Sandler M. et al. MobileNetV2: Inverted Residuals and Linear Bottlenecks. CVPR, 2018.</li>
+    <li>Tan M., Le Q. EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks. ICML, 2019.</li>
+    <li>He K. et al. Deep Residual Learning for Image Recognition. CVPR, 2016.</li>
+    <li>Yosinski J. et al. How transferable are features in deep neural networks? NeurIPS, 2014.</li>
+    <li>Guo C. et al. On Calibration of Modern Neural Networks. ICML, 2017.</li>
+    <li><a href="https://keras.io/api/applications/">Keras Applications</a> құжаттамасы; <a href="https://fastapi.tiangolo.com/">FastAPI</a> құжаттамасы.</li>
+  </ol>
+
+  <h2>Авторлар</h2>
+  <p>[Аты-жөні], [топ]: машиналық оқыту пәні, қорытынды жоба.</p>
+</section>
+{% endblock %}

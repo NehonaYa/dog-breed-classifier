@@ -1,0 +1,24 @@
+# Python 3.11–3.13. Тексерілген нұсқалар (Windows 11, CPU, Python 3.13.2)
+
+# Терең оқыту
+tensorflow==2.21.0
+keras==3.15.1
+
+# Деректер және классикалық ML
+numpy==2.5.5
+pandas==3.1.1
+scipy==1.18.1
+scikit-learn==1.9.1
+pillow==13.0.0
+matplotlib==3.11.2
+
+# Сайт (веб-сервер және API)
+fastapi==0.165.0
+uvicorn[standard]==0.54.0
+python-multipart==0.0.34
+jinja2==3.1.6
+
+# Jupyter ноутбуктері
+notebook>=7.0
+ipykernel>=6.0
+nbconvert>=7.0

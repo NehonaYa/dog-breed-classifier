@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Деректер (үлкен, scripts/00_download_data.py арқылы жүктеледі)
+data/raw/
+data/processed/fixed_images/
+
+# Аралық нәтижелер (scripts/02–04 қайта жасайды)
+artifacts/
+logs/
+
+# Эксперименттердегі барлық модель (scripts/03–04 қайта жасайды).
+# Сайтқа қажет соңғы модель models/final/ ішінде сақталады және репозиторийге кіреді.
+models/heads/
+models/*.keras
+models/*.h5
+
+# IDE / ОЖ
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# graphify
+graphify-out/

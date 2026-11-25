@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}Модельдер — Ит тұқымын тану{% endblock %}
+{% block content %}
+{% set m = final.test_metrics if final else {} %}
+{% set fam = {"baseline": "Бастапқы", "zero-shot": "Оқытусыз", "transfer": "Transfer learning"} %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Модельдерді әзірлеу және салыстыру</p>
+    <h1>Қай модель жақсы және неліктен?</h1>
+    <p class="lead">
+      Барлық модель бірдей train жиынында оқытылып, бірдей <strong>test</strong> жиынында
+      ({{ (quality.split_counts.test if quality and quality.split_counts else 8580) | num }} сурет) бағаланды.
+      Соңғы модель test бойынша емес, <strong>валидация</strong> жиыны бойынша таңдалды. Әйтпесе test нәтижесі
+      асыра бағаланар еді.
+    </p>
+  </div>
+</section>
+
+<section class="container section">
+  <h2>Таңдалған модель</h2>
+  <p class="prose"><strong>{{ final.title }}</strong></p>
+  <dl class="kpis">
+    <div class="kpi"><dt>Accuracy (test)</dt><dd>{{ m.accuracy | pct }}</dd></div>
+    <div class="kpi"><dt>Top-5 accuracy</dt><dd>{{ m.top5_accuracy | pct }}</dd></div>
+    <div class="kpi"><dt>Macro F1</dt><dd>{{ m.macro_f1 | pct }}</dd></div>
+    <div class="kpi"><dt>Log loss</dt><dd>{{ '%.3f' % m.log_loss if m.log_loss is not none else '—' }}</dd></div>
+  </dl>
+  {% if summary and summary.article_replica %}
+  <div class="callout" style="margin-top:20px">
+    <h3>Мақаламен салыстыру</h3>
+    <p class="prose" style="margin:0">
+      GeeksforGeeks мақаласында InceptionResNetV2 моделінің валидациядағы дәлдігі
+      <strong>{{ summary.article_reported_val_accuracy | pct }}</strong> (Kaggle деректері, 80/20 бөлініс).
+      Біз мақаланың моделін (InceptionResNetV2), классификатор басын және оқыту баптауларын (Adam, batch 32,
+      25 эпохаға дейін, EarlyStopping) қайталадық. Айырмасы: кіріс 299×299 (модельдің өз өлшемі) және модельдің
+      өз нормализациясы. Нәтиже: валидацияда <strong>{{ summary.article_replica.val_accuracy | pct }}</strong>, test жиынында
+      <strong>{{ summary.article_replica.test_accuracy | pct }}</strong>. Біздің таңдалған модель test-те
+      <strong>{{ m.accuracy | pct }}</strong> көрсетті.
+      {% if summary.baseline_cnn %}Нөлден оқытылған CNN небәрі <strong>{{ summary.baseline_cnn.test_accuracy | pct }}</strong>
+      көрсетті. Бұл transfer learning-тің пайдасын анық дәлелдейді.{% endif %}
+    </p>
+  </div>
+  {% endif %}
+</section>
+
+<section class="container section">
+  <h2>Барлық модельдің нәтижелері</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Түрі</th>
+          <th class="num">Accuracy</th><th class="num">Top-5</th><th class="num">Macro F1</th>
+          <th class="num">Log loss</th><th class="num">ECE</th><th class="num">Val acc.</th>
+          <th class="num">Параметр, млн</th><th class="num">Уақыт, мс</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for r in comparison | sort(attribute='test_accuracy', reverse=True) %}
+        <tr class="{{ 'is-selected' if r.selected }} {{ 'is-article' if r.id == 'inception_resnet_v2__article' }}">
+          <td>{{ r.title }}</td>
+          <td><span class="tag {{ 'tag-blue' if r.family == 'transfer' else 'tag-orange' if r.family == 'zero-shot' }}">{{ fam[r.family] }}</span></td>
+          <td class="num">{{ r.test_accuracy | pct }}</td>
+          <td class="num">{{ r.test_top5_accuracy | pct }}</td>
+          <td class="num">{{ r.test_macro_f1 | pct }}</td>
+          <td class="num">{{ '%.3f' % r.test_log_loss }}</td>
+          <td class="num">{{ '%.3f' % r.test_ece }}</td>
+          <td class="num">{{ r.val_accuracy | pct }}</td>
+          <td class="num">{{ '%.1f' % (r.params / 1e6) if r.params else '—' }}</td>
+          <td class="num">{{ '%.0f' % r.latency_ms if r.latency_ms else '—' }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="legend-row"><span class="lg-blue">таңдалған модель</span><span class="lg-orange">мақаланы қайталау</span>
+    <span>Уақыт — бір суретті CPU-да өңдеу (TensorFlow, batch = 1)</span></p>
+
+  <details class="prose" style="margin-top:16px">
+    <summary><strong>Метрикалар нені білдіреді?</strong></summary>
+    <ul>
+      <li><strong>Accuracy</strong> — дұрыс анықталған суреттердің үлесі.</li>
+      <li><strong>Top-5</strong> — дұрыс тұқым модельдің алғашқы бес болжамының ішінде болуы. Ұқсас тұқымдар көп болғандықтан маңызды.</li>
+      <li><strong>Macro F1</strong> — әр тұқым бойынша precision пен recall-дың гармоникалық ортасы, барлық тұқым тең салмақпен. Сурет саны аз тұқымдардағы әлсіздікті көрсетеді.</li>
+      <li><strong>Log loss</strong> — ықтималдықтардың сапасы: модель қате жауапқа тым сенімді болса, қатаң жазаланады (аз болған жақсы).</li>
+      <li><strong>ECE</strong> — калибрлеу қатесі: модель «90% сенімдімін» десе, шынымен шамамен 90% жағдайда дұрыс па (0-ге жақын болған жақсы).</li>
+    </ul>
+  </details>
+</section>
+
+<section class="container section">
+  <h2>Графиктер</h2>
+  <div class="grid-2">
+    <figure class="fig card"><img src="/figures/model_comparison.png" alt="Модельдердің test дәлдігі: бағаналы диаграмма" loading="lazy">
+      <figcaption>1-сурет. Барлық модельдің test жиынындағы дәлдігі. Нөлден оқытылған CNN мен transfer learning арасындағы айырма өте үлкен.</figcaption></figure>
+    <figure class="fig card"><img src="/figures/accuracy_vs_latency.png" alt="Дәлдік пен жылдамдық арасындағы байланыс" loading="lazy">
+      <figcaption>2-сурет. Дәлдік пен жылдамдық: үлкен модель дәлірек, бірақ баяу. Мобильді құрылғыға MobileNetV2 ыңғайлы.</figcaption></figure>
+  </div>
+  <figure class="fig card" style="margin-top:20px"><img src="/figures/training_curves.png" alt="Оқу қисықтары: дәлдік және қате эпохалар бойынша" loading="lazy">
+    <figcaption>3-сурет. Оқу қисықтары. EarlyStopping валидациядағы қате (val loss) ең төмен болған эпохадағы салмақтарды қалпына келтіреді.</figcaption></figure>
+</section>
+
+<section class="container section">
+  <h2>Қателерді талдау</h2>
+  {% if summary and summary.top_confused_pairs %}
+  <p class="prose">Модель жиі шатастыратын тұқымдар — сырт келбеті өте ұқсас тұқымдар (мысалы, бір тұқымның түрлі
+    өлшемдері немесе туыстас тұқымдар). Бұл қатенің бір бөлігі деректердің өзінен: деректерді тексергенде бір суреттің
+    екі түрлі тұқыммен белгіленген жағдайларын таптық.</p>
+  <div class="table-wrap" style="max-width:780px">
+    <table>
+      <thead><tr><th>Шын тұқым</th><th>Модельдің болжамы</th><th class="num">Саны</th><th class="num">Шын класс ішіндегі үлесі</th></tr></thead>
+      <tbody>
+      {% for p in summary.top_confused_pairs %}
+        <tr><td>{{ p.true }}</td><td>{{ p.predicted }}</td><td class="num">{{ p.count }}</td><td class="num">{{ p.share_of_true_class | pct }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+  <div class="grid-2" style="margin-top:20px">
+    <figure class="fig card"><img src="/figures/confusion_top.png" alt="Ең жиі шатастырылатын тұқымдардың қателер матрицасы" loading="lazy">
+      <figcaption>4-сурет. Қателер матрицасының бір бөлігі: ең жиі шатастырылатын тұқымдар.</figcaption></figure>
+    <figure class="fig card"><img src="/figures/per_class_worst.png" alt="Ең нашар танылатын 15 тұқымның F1 мәні" loading="lazy">
+      <figcaption>5-сурет. Ең нашар танылатын 15 тұқым (F1).</figcaption></figure>
+  </div>
+  <figure class="fig card" style="margin-top:20px"><img src="/figures/misclassified_examples.png" alt="Модель қателескен test суреттерінің мысалдары" loading="lazy">
+    <figcaption>6-сурет. Модель ең сенімді түрде қателескен суреттер. Кейбірінде суретте бірнеше ит бар немесе белгі (label) күмәнді.</figcaption></figure>
+  <div class="grid-2" style="margin-top:20px">
+    <figure class="fig card"><img src="/figures/confidence_calibration.png" alt="Сенімділік гистограммасы және калибрлеу графигі" loading="lazy">
+      <figcaption>7-сурет. Қате жауаптарда модельдің сенімділігі әдетте төмен. Сайттағы «сенімсіз» ескертуі осыған негізделген.</figcaption></figure>
+    <figure class="fig card"><img src="/figures/error_vs_bbox.png" alt="Иттің кадрдағы өлшемі мен ит саны бойынша дәлдік" loading="lazy">
+      <figcaption>8-сурет. Ит кадрда кішкентай болса (ауданы 25%-дан аз), дәлдік айтарлықтай төмендейді. Ит санының әсері әлсіз.</figcaption></figure>
+  </div>
+</section>
+{% endblock %}

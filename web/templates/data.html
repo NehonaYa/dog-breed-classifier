@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Деректер — Ит тұқымын тану{% endblock %}
+{% block content %}
+{% set q = quality or {} %}
+{% set sc = q.split_counts or {} %}
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Деректер жиыны және EDA</p>
+    <h1>Stanford Dogs: 120 тұқым, 20 580 сурет</h1>
+    <p class="lead">
+      Деректер — Стэнфорд университетінің <a href="http://vision.stanford.edu/aditya86/ImageNetDogs/">Stanford Dogs Dataset</a>
+      жиыны (Khosla et al., 2011). Ол ImageNet-тен алынған. GeeksforGeeks мақаласындағы Kaggle
+      «Dog Breed Identification» деректері осы жиынның бір бөлігі: тұқымдар тізімі бірдей (120 тұқым).
+    </p>
+  </div>
+</section>
+
+<section class="container section">
+  <h2>Деректердің құрылымы</h2>
+  <div class="grid-2">
+    <div class="prose">
+      <ul>
+        <li><strong>Кіріс (белгі, feature):</strong> түрлі-түсті сурет (JPEG), өлшемдері әртүрлі
+          {% if eda and eda.median_width %}(медианасы {{ eda.median_width }}×{{ eda.median_height }} пиксель){% endif %}.</li>
+        <li><strong>Мақсатты айнымалы (target):</strong> иттің тұқымы, 120 класс.</li>
+        <li><strong>Қосымша аннотация:</strong> әр суреттегі иттің орны (bounding box). Біз оны тек талдау үшін қолдандық (ит кадрдың қанша бөлігін алады, суретте неше ит бар).</li>
+        <li><strong>Бөлініс:</strong> ресми train/test бөлінісі сақталды. Ресми train-нен әр тұқымға 15 сурет валидацияға бөлінді.</li>
+      </ul>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Бөлік</th><th class="num">Сурет</th><th>Мақсаты</th></tr></thead>
+        <tbody>
+          <tr><td>train</td><td class="num">{{ sc.train | num }}</td><td>модельді оқыту</td></tr>
+          <tr><td>val</td><td class="num">{{ sc.val | num }}</td><td>гиперпараметр мен модель таңдау</td></tr>
+          <tr><td>test</td><td class="num">{{ sc.test | num }}</td><td>тек соңғы бағалау</td></tr>
+          <tr><td>алынып тасталды</td><td class="num">{{ (q.total_images - (sc.train or 0) - (sc.val or 0) - (sc.test or 0)) | num if q.total_images else '—' }}</td><td>көшірмелер, белгі қайшылығы</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="container section">
+  <h2>Деректерді тазалау: не таптық?</h2>
+  <div class="stat-list">
+    <div class="kpi"><dt>Бұзылған файл</dt><dd>{{ q.corrupt_files if q.corrupt_files is not none else '—' }}</dd></div>
+    <div class="kpi"><dt>Түзетілген файл (PNG → JPEG)</dt><dd>{{ q.fixed_images if q.fixed_images is not none else '—' }}</dd></div>
+    <div class="kpi"><dt>Жуық көшірме жұптары</dt><dd>{{ q.near_duplicate_pairs if q.near_duplicate_pairs is not none else '—' }}</dd></div>
+  </div>
+  <div class="prose">
+    <ul>
+      <li><strong>Жетіспейтін мәндер:</strong> барлық суреттің белгісі мен аннотациясы бар
+        ({{ q.missing_annotation if q.missing_annotation is not none else 0 }} жетіспейтін аннотация). Бұзылған файл жоқ.</li>
+      <li><strong>Қате формат:</strong> 1 файлдың атауы .jpg, бірақ іші PNG (RGBA) болып шықты, оны RGB JPEG-ке айналдырдық.</li>
+      <li><strong>Көшірмелер:</strong> MD5 және dHash (кескіннің «саусақ ізі») арқылы {{ q.near_duplicate_pairs }} жуық көшірме жұбы табылды.
+        Олардың {{ q.excluded_by_reason.duplicate_of_test if q.excluded_by_reason else '' }} суреті test-тегі суреттің көшірмесі болды.
+        Бұл «деректердің ағып кетуі» (leakage), сондықтан олар train-нен алынды.</li>
+      <li><strong>Белгі қайшылығы:</strong> {{ q.label_conflict_clusters }} топта <em>бірдей сурет екі түрлі тұқыммен</em> белгіленген
+        (мысалы, Walker hound ↔ English foxhound, Japanese spaniel ↔ Blenheim spaniel). Олар train-нен алынды, ал test ресми түрінде
+        қалдырылды. Сондықтан test-тегі қателердің бір бөлігін модель түбегейлі болдыра алмайды.</li>
+    </ul>
+  </div>
+  <figure class="fig card" style="margin-top:12px"><img src="/figures/eda_duplicates.png" alt="Екі түрлі тұқыммен белгіленген бірдей суреттердің мысалдары" loading="lazy">
+    <figcaption>Бірдей суреттер, бірақ белгілері әртүрлі: деректер жиынындағы белгі қателерінің мысалдары.</figcaption></figure>
+</section>
+
+<section class="container section">
+  <h2>Барлау талдауы (EDA)</h2>
+  <figure class="fig card"><img src="/figures/eda_samples.png" alt="Әртүрлі тұқымдардың сурет мысалдары" loading="lazy">
+    <figcaption>Деректерден мысалдар: фон, жарық, ракурс және иттің кадрдағы өлшемі әртүрлі.</figcaption></figure>
+  <div class="grid-2" style="margin-top:20px">
+    <figure class="fig card"><img src="/figures/eda_class_distribution.png" alt="Әр тұқымдағы сурет саны" loading="lazy">
+      <figcaption>Әр тұқымдағы сурет саны: train теңестірілген (әр тұқымда шамамен 85 сурет), ал test теңестірілмеген.</figcaption></figure>
+    <figure class="fig card"><img src="/figures/eda_image_sizes.png" alt="Сурет өлшемдерінің таралуы" loading="lazy">
+      <figcaption>Суреттердің ені мен биіктігі және пропорциясы. Модельге берер алдында барлығы бір өлшемге келтіріледі.</figcaption></figure>
+  </div>
+  <div class="grid-2" style="margin-top:20px">
+    <figure class="fig card"><img src="/figures/eda_bbox.png" alt="Иттің кадрдағы ауданы және ит санының таралуы" loading="lazy">
+      <figcaption>Иттің кадрдағы ауданының үлесі және бір суреттегі ит саны (аннотация бойынша).</figcaption></figure>
+    <figure class="fig card"><img src="/figures/eda_brightness.png" alt="Суреттердің жарықтығы мен түс арналарының таралуы" loading="lazy">
+      <figcaption>Суреттердің орташа жарықтығы мен түс арналары: деректер жарық пен түс жағынан әртүрлі.</figcaption></figure>
+  </div>
+</section>
+{% endblock %}

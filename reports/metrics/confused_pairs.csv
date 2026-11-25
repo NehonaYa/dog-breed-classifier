@@ -1,0 +1,21 @@
+true,predicted,count,share_of_true_class
+Siberian husky,Eskimo dog,28,0.304
+Eskimo dog,Siberian husky,15,0.3
+Scottish deerhound,Irish wolfhound,13,0.098
+Lhasa,Shih-Tzu,12,0.14
+Collie,Border collie,11,0.208
+Staffordshire bullterrier,American Staffordshire terrier,10,0.182
+Shih-Tzu,Lhasa,9,0.079
+Irish wolfhound,Scottish deerhound,9,0.076
+Silky terrier,Yorkshire terrier,9,0.108
+English foxhound,Walker hound,8,0.14
+American Staffordshire terrier,Staffordshire bullterrier,8,0.125
+Shetland sheepdog,Collie,7,0.123
+EntleBucher,Appenzeller,7,0.069
+Malamute,Eskimo dog,7,0.09
+Miniature poodle,Toy poodle,7,0.127
+Maltese dog,Lhasa,6,0.039
+Kuvasz,Great Pyrenees,6,0.12
+Malamute,Siberian husky,6,0.077
+Toy poodle,Miniature poodle,6,0.118
+Australian terrier,Yorkshire terrier,5,0.052

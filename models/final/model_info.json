@@ -1,0 +1,77 @@
+{
+  "model_id": "inception_resnet_v2__linear",
+  "title": "InceptionResNetV2 + сызықтық бас",
+  "backbone": "inception_resnet_v2",
+  "head": "linear",
+  "tta": false,
+  "input_size": 299,
+  "test_metrics": {
+    "accuracy": 0.9249,
+    "top5_accuracy": 0.9943,
+    "macro_precision": 0.9221,
+    "macro_recall": 0.9229,
+    "macro_f1": 0.9219,
+    "weighted_f1": 0.9252,
+    "balanced_accuracy": 0.9229,
+    "log_loss": 0.2491,
+    "ece": 0.0124
+  },
+  "val_accuracy": 0.9217,
+  "params": 54521176,
+  "latency_ms": 204.3,
+  "low_confidence_threshold": 0.5,
+  "accuracy_when_conf_ge_threshold": 0.937,
+  "share_conf_ge_threshold": 0.9766,
+  "accuracy_when_conf_lt_threshold": 0.4229,
+  "confidence_thresholds": [
+    {
+      "threshold": 0.3,
+      "share_above": 0.9972,
+      "accuracy_above": 0.9268,
+      "accuracy_below": 0.25
+    },
+    {
+      "threshold": 0.4,
+      "share_above": 0.9913,
+      "accuracy_above": 0.9299,
+      "accuracy_below": 0.36
+    },
+    {
+      "threshold": 0.5,
+      "share_above": 0.9766,
+      "accuracy_above": 0.937,
+      "accuracy_below": 0.4229
+    },
+    {
+      "threshold": 0.6,
+      "share_above": 0.9485,
+      "accuracy_above": 0.9469,
+      "accuracy_below": 0.5204
+    },
+    {
+      "threshold": 0.7,
+      "share_above": 0.9146,
+      "accuracy_above": 0.9596,
+      "accuracy_below": 0.5539
+    },
+    {
+      "threshold": 0.8,
+      "share_above": 0.8766,
+      "accuracy_above": 0.9698,
+      "accuracy_below": 0.6062
+    },
+    {
+      "threshold": 0.9,
+      "share_above": 0.8235,
+      "accuracy_above": 0.98,
+      "accuracy_below": 0.6678
+    }
+  ],
+  "dogness_threshold": 0.5,
+  "dogness_test_percentiles": {
+    "1": 0.7778,
+    "5": 0.8837,
+    "10": 0.9027,
+    "50": 0.9386
+  }
+}

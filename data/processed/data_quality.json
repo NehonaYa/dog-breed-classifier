@@ -1,0 +1,305 @@
+{
+  "total_images": 20580,
+  "classes": 120,
+  "corrupt_files": 0,
+  "fixed_images": 1,
+  "fixed_reasons": {
+    "PNG/RGBA": 1
+  },
+  "near_duplicate_pairs": 130,
+  "duplicate_clusters": 128,
+  "label_conflict_clusters": 48,
+  "excluded_by_reason": {
+    "label_conflict": 57,
+    "duplicate_of_test": 39,
+    "duplicate_in_train": 34
+  },
+  "split_counts": {
+    "train": 10070,
+    "test": 8580,
+    "val": 1800
+  },
+  "missing_annotation": 0,
+  "duplicate_examples": [
+    {
+      "paths": [
+        "n02085782-Japanese_spaniel/n02085782_2796.jpg",
+        "n02085782-Japanese_spaniel/n02085782_2655.jpg"
+      ],
+      "breeds": [
+        "Japanese_spaniel",
+        "Japanese_spaniel"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "paths": [
+        "n02085782-Japanese_spaniel/n02085782_2459.jpg",
+        "n02097474-Tibetan_terrier/n02097474_1962.jpg"
+      ],
+      "breeds": [
+        "Japanese_spaniel",
+        "Tibetan_terrier"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02085782-Japanese_spaniel/n02085782_313.jpg",
+        "n02086646-Blenheim_spaniel/n02086646_280.jpg"
+      ],
+      "breeds": [
+        "Japanese_spaniel",
+        "Blenheim_spaniel"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02085782-Japanese_spaniel/n02085782_186.jpg",
+        "n02086646-Blenheim_spaniel/n02086646_172.jpg"
+      ],
+      "breeds": [
+        "Japanese_spaniel",
+        "Blenheim_spaniel"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02086646-Blenheim_spaniel/n02086646_1445.jpg",
+        "n02086646-Blenheim_spaniel/n02086646_422.jpg"
+      ],
+      "breeds": [
+        "Blenheim_spaniel",
+        "Blenheim_spaniel"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02088466-bloodhound/n02088466_7015.jpg",
+        "n02088466-bloodhound/n02088466_8078.jpg"
+      ],
+      "breeds": [
+        "bloodhound",
+        "bloodhound"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "paths": [
+        "n02088466-bloodhound/n02088466_7462.jpg",
+        "n02090379-redbone/n02090379_3300.jpg"
+      ],
+      "breeds": [
+        "bloodhound",
+        "redbone"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "paths": [
+        "n02088632-bluetick/n02088632_4360.jpg",
+        "n02088632-bluetick/n02088632_600.jpg"
+      ],
+      "breeds": [
+        "bluetick",
+        "bluetick"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "paths": [
+        "n02088632-bluetick/n02088632_982.jpg",
+        "n02088632-bluetick/n02088632_819.jpg"
+      ],
+      "breeds": [
+        "bluetick",
+        "bluetick"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02089078-black-and-tan_coonhound/n02089078_19.jpg",
+        "n02089078-black-and-tan_coonhound/n02089078_2417.jpg"
+      ],
+      "breeds": [
+        "black-and-tan_coonhound",
+        "black-and-tan_coonhound"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "paths": [
+        "n02089867-Walker_hound/n02089867_24.jpg",
+        "n02089867-Walker_hound/n02089867_2382.jpg"
+      ],
+      "breeds": [
+        "Walker_hound",
+        "Walker_hound"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "paths": [
+        "n02089867-Walker_hound/n02089867_3177.jpg",
+        "n02089867-Walker_hound/n02089867_3108.jpg"
+      ],
+      "breeds": [
+        "Walker_hound",
+        "Walker_hound"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "paths": [
+        "n02089867-Walker_hound/n02089867_2653.jpg",
+        "n02089973-English_foxhound/n02089973_2905.jpg"
+      ],
+      "breeds": [
+        "Walker_hound",
+        "English_foxhound"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02089867-Walker_hound/n02089867_3608.jpg",
+        "n02089973-English_foxhound/n02089973_1076.jpg"
+      ],
+      "breeds": [
+        "Walker_hound",
+        "English_foxhound"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02089867-Walker_hound/n02089867_2880.jpg",
+        "n02089973-English_foxhound/n02089973_3160.jpg"
+      ],
+      "breeds": [
+        "Walker_hound",
+        "English_foxhound"
+      ],
+      "splits": [
+        "train",
+        "train"
+      ]
+    },
+    {
+      "paths": [
+        "n02089973-English_foxhound/n02089973_2211.jpg",
+        "n02089867-Walker_hound/n02089867_3840.jpg"
+      ],
+      "breeds": [
+        "English_foxhound",
+        "Walker_hound"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02089973-English_foxhound/n02089973_2093.jpg",
+        "n02089867-Walker_hound/n02089867_1882.jpg"
+      ],
+      "breeds": [
+        "English_foxhound",
+        "Walker_hound"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02090379-redbone/n02090379_855.jpg",
+        "n02090379-redbone/n02090379_4667.jpg"
+      ],
+      "breeds": [
+        "redbone",
+        "redbone"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02091635-otterhound/n02091635_4698.jpg",
+        "n02091635-otterhound/n02091635_873.jpg"
+      ],
+      "breeds": [
+        "otterhound",
+        "otterhound"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    },
+    {
+      "paths": [
+        "n02091831-Saluki/n02091831_13767.jpg",
+        "n02091831-Saluki/n02091831_6323.jpg"
+      ],
+      "breeds": [
+        "Saluki",
+        "Saluki"
+      ],
+      "splits": [
+        "train",
+        "test"
+      ]
+    }
+  ]
+}

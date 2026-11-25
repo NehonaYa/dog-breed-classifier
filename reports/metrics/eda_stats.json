@@ -1,0 +1,38 @@
+{
+  "n_images_total": 20580,
+  "n_images_used": 20450,
+  "n_classes": 120,
+  "missing_values": 0,
+  "formats": {
+    "JPEG": 20579,
+    "PNG": 1
+  },
+  "modes": {
+    "RGB": 20579,
+    "RGBA": 1
+  },
+  "median_width": 500,
+  "median_height": 375,
+  "min_width": 97,
+  "max_width": 3264,
+  "min_height": 100,
+  "max_height": 2562,
+  "median_aspect": 1.333,
+  "median_file_kb": 32.2,
+  "per_class_min": {
+    "breed": "Dhole",
+    "n": 144
+  },
+  "per_class_max": {
+    "breed": "Maltese dog",
+    "n": 252
+  },
+  "train_per_class_min": 77,
+  "train_per_class_max": 85,
+  "test_per_class_min": 48,
+  "test_per_class_max": 152,
+  "share_multi_dog": 0.066,
+  "median_bbox_frac": 0.553,
+  "share_dog_lt_25pct": 0.1454,
+  "median_brightness": 111.7
+}

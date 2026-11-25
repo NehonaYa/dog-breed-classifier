@@ -1,0 +1,6 @@
+{
+  "mobilenet_v2": 30.7,
+  "efficientnet_b0": 56.6,
+  "inception_resnet_v2": 204.3,
+  "baseline_cnn": 4.6
+}

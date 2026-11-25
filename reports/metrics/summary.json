@@ -1,0 +1,775 @@
+{
+  "data_quality": {
+    "total_images": 20580,
+    "classes": 120,
+    "corrupt_files": 0,
+    "fixed_images": 1,
+    "fixed_reasons": {
+      "PNG/RGBA": 1
+    },
+    "near_duplicate_pairs": 130,
+    "duplicate_clusters": 128,
+    "label_conflict_clusters": 48,
+    "excluded_by_reason": {
+      "label_conflict": 57,
+      "duplicate_of_test": 39,
+      "duplicate_in_train": 34
+    },
+    "split_counts": {
+      "train": 10070,
+      "test": 8580,
+      "val": 1800
+    },
+    "missing_annotation": 0,
+    "duplicate_examples": [
+      {
+        "paths": [
+          "n02085782-Japanese_spaniel/n02085782_2796.jpg",
+          "n02085782-Japanese_spaniel/n02085782_2655.jpg"
+        ],
+        "breeds": [
+          "Japanese_spaniel",
+          "Japanese_spaniel"
+        ],
+        "splits": [
+          "train",
+          "train"
+        ]
+      },
+      {
+        "paths": [
+          "n02085782-Japanese_spaniel/n02085782_2459.jpg",
+          "n02097474-Tibetan_terrier/n02097474_1962.jpg"
+        ],
+        "breeds": [
+          "Japanese_spaniel",
+          "Tibetan_terrier"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02085782-Japanese_spaniel/n02085782_313.jpg",
+          "n02086646-Blenheim_spaniel/n02086646_280.jpg"
+        ],
+        "breeds": [
+          "Japanese_spaniel",
+          "Blenheim_spaniel"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02085782-Japanese_spaniel/n02085782_186.jpg",
+          "n02086646-Blenheim_spaniel/n02086646_172.jpg"
+        ],
+        "breeds": [
+          "Japanese_spaniel",
+          "Blenheim_spaniel"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02086646-Blenheim_spaniel/n02086646_1445.jpg",
+          "n02086646-Blenheim_spaniel/n02086646_422.jpg"
+        ],
+        "breeds": [
+          "Blenheim_spaniel",
+          "Blenheim_spaniel"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02088466-bloodhound/n02088466_7015.jpg",
+          "n02088466-bloodhound/n02088466_8078.jpg"
+        ],
+        "breeds": [
+          "bloodhound",
+          "bloodhound"
+        ],
+        "splits": [
+          "train",
+          "train"
+        ]
+      },
+      {
+        "paths": [
+          "n02088466-bloodhound/n02088466_7462.jpg",
+          "n02090379-redbone/n02090379_3300.jpg"
+        ],
+        "breeds": [
+          "bloodhound",
+          "redbone"
+        ],
+        "splits": [
+          "train",
+          "train"
+        ]
+      },
+      {
+        "paths": [
+          "n02088632-bluetick/n02088632_4360.jpg",
+          "n02088632-bluetick/n02088632_600.jpg"
+        ],
+        "breeds": [
+          "bluetick",
+          "bluetick"
+        ],
+        "splits": [
+          "train",
+          "train"
+        ]
+      },
+      {
+        "paths": [
+          "n02088632-bluetick/n02088632_982.jpg",
+          "n02088632-bluetick/n02088632_819.jpg"
+        ],
+        "breeds": [
+          "bluetick",
+          "bluetick"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02089078-black-and-tan_coonhound/n02089078_19.jpg",
+          "n02089078-black-and-tan_coonhound/n02089078_2417.jpg"
+        ],
+        "breeds": [
+          "black-and-tan_coonhound",
+          "black-and-tan_coonhound"
+        ],
+        "splits": [
+          "train",
+          "train"
+        ]
+      },
+      {
+        "paths": [
+          "n02089867-Walker_hound/n02089867_24.jpg",
+          "n02089867-Walker_hound/n02089867_2382.jpg"
+        ],
+        "breeds": [
+          "Walker_hound",
+          "Walker_hound"
+        ],
+        "splits": [
+          "train",
+          "train"
+        ]
+      },
+      {
+        "paths": [
+          "n02089867-Walker_hound/n02089867_3177.jpg",
+          "n02089867-Walker_hound/n02089867_3108.jpg"
+        ],
+        "breeds": [
+          "Walker_hound",
+          "Walker_hound"
+        ],
+        "splits": [
+          "train",
+          "train"
+        ]
+      },
+      {
+        "paths": [
+          "n02089867-Walker_hound/n02089867_2653.jpg",
+          "n02089973-English_foxhound/n02089973_2905.jpg"
+        ],
+        "breeds": [
+          "Walker_hound",
+          "English_foxhound"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02089867-Walker_hound/n02089867_3608.jpg",
+          "n02089973-English_foxhound/n02089973_1076.jpg"
+        ],
+        "breeds": [
+          "Walker_hound",
+          "English_foxhound"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02089867-Walker_hound/n02089867_2880.jpg",
+          "n02089973-English_foxhound/n02089973_3160.jpg"
+        ],
+        "breeds": [
+          "Walker_hound",
+          "English_foxhound"
+        ],
+        "splits": [
+          "train",
+          "train"
+        ]
+      },
+      {
+        "paths": [
+          "n02089973-English_foxhound/n02089973_2211.jpg",
+          "n02089867-Walker_hound/n02089867_3840.jpg"
+        ],
+        "breeds": [
+          "English_foxhound",
+          "Walker_hound"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02089973-English_foxhound/n02089973_2093.jpg",
+          "n02089867-Walker_hound/n02089867_1882.jpg"
+        ],
+        "breeds": [
+          "English_foxhound",
+          "Walker_hound"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02090379-redbone/n02090379_855.jpg",
+          "n02090379-redbone/n02090379_4667.jpg"
+        ],
+        "breeds": [
+          "redbone",
+          "redbone"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02091635-otterhound/n02091635_4698.jpg",
+          "n02091635-otterhound/n02091635_873.jpg"
+        ],
+        "breeds": [
+          "otterhound",
+          "otterhound"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      },
+      {
+        "paths": [
+          "n02091831-Saluki/n02091831_13767.jpg",
+          "n02091831-Saluki/n02091831_6323.jpg"
+        ],
+        "breeds": [
+          "Saluki",
+          "Saluki"
+        ],
+        "splits": [
+          "train",
+          "test"
+        ]
+      }
+    ]
+  },
+  "final_model": {
+    "model_id": "inception_resnet_v2__linear",
+    "title": "InceptionResNetV2 + сызықтық бас",
+    "backbone": "inception_resnet_v2",
+    "head": "linear",
+    "tta": false,
+    "input_size": 299,
+    "test_metrics": {
+      "accuracy": 0.9249,
+      "top5_accuracy": 0.9943,
+      "macro_precision": 0.9221,
+      "macro_recall": 0.9229,
+      "macro_f1": 0.9219,
+      "weighted_f1": 0.9252,
+      "balanced_accuracy": 0.9229,
+      "log_loss": 0.2491,
+      "ece": 0.0124
+    },
+    "val_accuracy": 0.9217,
+    "params": 54521176,
+    "latency_ms": 204.3,
+    "low_confidence_threshold": 0.5,
+    "accuracy_when_conf_ge_threshold": 0.937,
+    "share_conf_ge_threshold": 0.9766,
+    "accuracy_when_conf_lt_threshold": 0.4229,
+    "confidence_thresholds": [
+      {
+        "threshold": 0.3,
+        "share_above": 0.9972,
+        "accuracy_above": 0.9268,
+        "accuracy_below": 0.25
+      },
+      {
+        "threshold": 0.4,
+        "share_above": 0.9913,
+        "accuracy_above": 0.9299,
+        "accuracy_below": 0.36
+      },
+      {
+        "threshold": 0.5,
+        "share_above": 0.9766,
+        "accuracy_above": 0.937,
+        "accuracy_below": 0.4229
+      },
+      {
+        "threshold": 0.6,
+        "share_above": 0.9485,
+        "accuracy_above": 0.9469,
+        "accuracy_below": 0.5204
+      },
+      {
+        "threshold": 0.7,
+        "share_above": 0.9146,
+        "accuracy_above": 0.9596,
+        "accuracy_below": 0.5539
+      },
+      {
+        "threshold": 0.8,
+        "share_above": 0.8766,
+        "accuracy_above": 0.9698,
+        "accuracy_below": 0.6062
+      },
+      {
+        "threshold": 0.9,
+        "share_above": 0.8235,
+        "accuracy_above": 0.98,
+        "accuracy_below": 0.6678
+      }
+    ],
+    "dogness_threshold": 0.5,
+    "dogness_test_percentiles": {
+      "1": 0.7778,
+      "5": 0.8837,
+      "10": 0.9027,
+      "50": 0.9386
+    }
+  },
+  "article_reported_val_accuracy": 0.9023,
+  "article_replica": {
+    "id": "inception_resnet_v2__article",
+    "title": "InceptionResNetV2 + мақаладағы MLP басы",
+    "test_accuracy": 0.9079,
+    "test_top5_accuracy": 0.9855,
+    "test_macro_f1": 0.8997,
+    "test_log_loss": 0.4187,
+    "test_ece": 0.041,
+    "val_accuracy": 0.9106,
+    "params": 55309528,
+    "latency_ms": 204.3
+  },
+  "baseline_cnn": {
+    "id": "baseline_cnn",
+    "title": "Нөлден оқытылған CNN (baseline)",
+    "test_accuracy": 0.0808,
+    "test_top5_accuracy": 0.2814,
+    "test_macro_f1": 0.0634,
+    "test_log_loss": 4.0319,
+    "test_ece": 0.0217,
+    "val_accuracy": 0.0817,
+    "params": 420696,
+    "latency_ms": 4.6
+  },
+  "dummy": {
+    "id": "dummy",
+    "title": "Ең жиі класс (кездейсоқ деңгей)",
+    "test_accuracy": 0.0061,
+    "test_top5_accuracy": 0.0512,
+    "test_macro_f1": 0.0001,
+    "test_log_loss": 4.7864,
+    "test_ece": 0.0024,
+    "val_accuracy": 0.0083,
+    "params": 0,
+    "latency_ms": 0.0
+  },
+  "best_zero_shot": {
+    "id": "zeroshot__inception_resnet_v2",
+    "title": "InceptionResNetV2: ImageNet басы, оқытусыз",
+    "test_accuracy": 0.9259,
+    "test_top5_accuracy": 0.9972,
+    "test_macro_f1": 0.9211,
+    "test_log_loss": 0.2392,
+    "test_ece": 0.0196,
+    "val_accuracy": 0.9206,
+    "params": 54336736,
+    "latency_ms": 204.3
+  },
+  "worst_classes": [
+    {
+      "breed": "Eskimo dog",
+      "precision": 0.413,
+      "recall": 0.52,
+      "f1": 0.46,
+      "support": 50
+    },
+    {
+      "breed": "Collie",
+      "precision": 0.756,
+      "recall": 0.642,
+      "f1": 0.694,
+      "support": 53
+    },
+    {
+      "breed": "Siberian husky",
+      "precision": 0.729,
+      "recall": 0.674,
+      "f1": 0.701,
+      "support": 92
+    },
+    {
+      "breed": "Staffordshire bullterrier",
+      "precision": 0.778,
+      "recall": 0.764,
+      "f1": 0.771,
+      "support": 55
+    },
+    {
+      "breed": "Yorkshire terrier",
+      "precision": 0.757,
+      "recall": 0.828,
+      "f1": 0.791,
+      "support": 64
+    },
+    {
+      "breed": "Lhasa",
+      "precision": 0.793,
+      "recall": 0.802,
+      "f1": 0.798,
+      "support": 86
+    },
+    {
+      "breed": "Appenzeller",
+      "precision": 0.746,
+      "recall": 0.863,
+      "f1": 0.8,
+      "support": 51
+    },
+    {
+      "breed": "American Staffordshire terrier",
+      "precision": 0.779,
+      "recall": 0.828,
+      "f1": 0.803,
+      "support": 64
+    },
+    {
+      "breed": "Walker hound",
+      "precision": 0.786,
+      "recall": 0.83,
+      "f1": 0.807,
+      "support": 53
+    },
+    {
+      "breed": "Miniature poodle",
+      "precision": 0.804,
+      "recall": 0.818,
+      "f1": 0.811,
+      "support": 55
+    }
+  ],
+  "best_classes": [
+    {
+      "breed": "Bedlington terrier",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 82
+    },
+    {
+      "breed": "African hunting dog",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 69
+    },
+    {
+      "breed": "Keeshond",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 58
+    },
+    {
+      "breed": "Mexican hairless",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 55
+    },
+    {
+      "breed": "Saint Bernard",
+      "precision": 1.0,
+      "recall": 0.986,
+      "f1": 0.993,
+      "support": 70
+    },
+    {
+      "breed": "Afghan hound",
+      "precision": 1.0,
+      "recall": 0.986,
+      "f1": 0.993,
+      "support": 139
+    },
+    {
+      "breed": "Pug",
+      "precision": 1.0,
+      "recall": 0.98,
+      "f1": 0.99,
+      "support": 100
+    },
+    {
+      "breed": "Boston bull",
+      "precision": 1.0,
+      "recall": 0.976,
+      "f1": 0.988,
+      "support": 82
+    },
+    {
+      "breed": "Leonberg",
+      "precision": 1.0,
+      "recall": 0.973,
+      "f1": 0.986,
+      "support": 110
+    },
+    {
+      "breed": "Sealyham terrier",
+      "precision": 0.99,
+      "recall": 0.98,
+      "f1": 0.985,
+      "support": 102
+    }
+  ],
+  "top_confused_pairs": [
+    {
+      "true": "Siberian husky",
+      "predicted": "Eskimo dog",
+      "count": 28,
+      "share_of_true_class": 0.304
+    },
+    {
+      "true": "Eskimo dog",
+      "predicted": "Siberian husky",
+      "count": 15,
+      "share_of_true_class": 0.3
+    },
+    {
+      "true": "Scottish deerhound",
+      "predicted": "Irish wolfhound",
+      "count": 13,
+      "share_of_true_class": 0.098
+    },
+    {
+      "true": "Lhasa",
+      "predicted": "Shih-Tzu",
+      "count": 12,
+      "share_of_true_class": 0.14
+    },
+    {
+      "true": "Collie",
+      "predicted": "Border collie",
+      "count": 11,
+      "share_of_true_class": 0.208
+    },
+    {
+      "true": "Staffordshire bullterrier",
+      "predicted": "American Staffordshire terrier",
+      "count": 10,
+      "share_of_true_class": 0.182
+    },
+    {
+      "true": "Shih-Tzu",
+      "predicted": "Lhasa",
+      "count": 9,
+      "share_of_true_class": 0.079
+    },
+    {
+      "true": "Irish wolfhound",
+      "predicted": "Scottish deerhound",
+      "count": 9,
+      "share_of_true_class": 0.076
+    },
+    {
+      "true": "Silky terrier",
+      "predicted": "Yorkshire terrier",
+      "count": 9,
+      "share_of_true_class": 0.108
+    },
+    {
+      "true": "English foxhound",
+      "predicted": "Walker hound",
+      "count": 8,
+      "share_of_true_class": 0.14
+    }
+  ],
+  "most_confident_errors": [
+    {
+      "path": "data/raw/stanford_dogs/Images/n02107142-Doberman/n02107142_7206.jpg",
+      "true": "Doberman",
+      "pred": "Miniature pinscher",
+      "confidence": 0.998,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.823
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02111277-Newfoundland/n02111277_13070.jpg",
+      "true": "Newfoundland",
+      "pred": "Flat-coated retriever",
+      "confidence": 0.998,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.599
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02112706-Brabancon_griffon/n02112706_1292.jpg",
+      "true": "Brabancon griffon",
+      "pred": "Pekinese",
+      "confidence": 0.997,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.594
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02091134-whippet/n02091134_17675.jpg",
+      "true": "Whippet",
+      "pred": "Italian greyhound",
+      "confidence": 0.997,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.631
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02097298-Scotch_terrier/n02097298_195.jpg",
+      "true": "Scotch terrier",
+      "pred": "West Highland white terrier",
+      "confidence": 0.996,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.693
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02090379-redbone/n02090379_2066.jpg",
+      "true": "Redbone",
+      "pred": "Vizsla",
+      "confidence": 0.996,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.335
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02087394-Rhodesian_ridgeback/n02087394_7019.jpg",
+      "true": "Rhodesian ridgeback",
+      "pred": "Chesapeake Bay retriever",
+      "confidence": 0.995,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.218
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02108551-Tibetan_mastiff/n02108551_1689.jpg",
+      "true": "Tibetan mastiff",
+      "pred": "Newfoundland",
+      "confidence": 0.995,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.375
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02091134-whippet/n02091134_16337.jpg",
+      "true": "Whippet",
+      "pred": "Briard",
+      "confidence": 0.995,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.103
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02115913-dhole/n02115913_3902.jpg",
+      "true": "Dhole",
+      "pred": "Dingo",
+      "confidence": 0.995,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.604
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02092002-Scottish_deerhound/n02092002_6915.jpg",
+      "true": "Scottish deerhound",
+      "pred": "Irish wolfhound",
+      "confidence": 0.994,
+      "n_dogs": 1,
+      "bbox_frac_max": 0.788
+    },
+    {
+      "path": "data/raw/stanford_dogs/Images/n02105412-kelpie/n02105412_4038.jpg",
+      "true": "Kelpie",
+      "pred": "Dingo",
+      "confidence": 0.994,
+      "n_dogs": 2,
+      "bbox_frac_max": 0.113
+    }
+  ],
+  "error_vs_bbox": {
+    "by_size": {
+      "<10%": {
+        "accuracy": 0.7983,
+        "n": 233
+      },
+      "10–25%": {
+        "accuracy": 0.9055,
+        "n": 1037
+      },
+      "25–50%": {
+        "accuracy": 0.9317,
+        "n": 2476
+      },
+      "50–75%": {
+        "accuracy": 0.937,
+        "n": 2764
+      },
+      ">75%": {
+        "accuracy": 0.9246,
+        "n": 2070
+      }
+    },
+    "by_dogs": {
+      "1": {
+        "accuracy": 0.9251,
+        "n": 7985
+      },
+      "2": {
+        "accuracy": 0.9213,
+        "n": 534
+      },
+      "3+": {
+        "accuracy": 0.9344,
+        "n": 61
+      }
+    }
+  }
+}
